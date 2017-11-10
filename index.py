@@ -6,7 +6,7 @@ __date__ ="$Nov 10, 2017 10:04:55 AM$"
 
 #import useful modules, comment out unused to make twisted more lightweight
 from twisted.enterprise import adbapi
-import MySQLdb
+import MySQLdb, os
 from twisted.web.resource import Resource
 from twisted.python import log
 from twisted.internet import ssl, reactor, task,  threads
@@ -24,13 +24,14 @@ from zope.interface import Interface, Attribute, implements
 from twisted.python.components import registerAdapter
 
 
-site_root="/python_projects/sms"
-log_path=site_root+"/logs/requests.txt"
-template_path=site_root+"/templates"
-public_path = template_path+"/public"
+site_root=os.path.join("\python_projects","twisted-website")
+log_path=os.path.join(site_root, "logs", "requests.txt")
+template_path=os.path.join(site_root,"templates")
+public_path = os.path.join(site_root,"public")
 jinja_extensions=['jinja2.ext.autoescape']
 server_port=8080
 
+print(public_path)
 public_resource=File(public_path)
 
 
